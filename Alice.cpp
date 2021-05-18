@@ -15,6 +15,7 @@ void Alice::pick_item(const Items& item)
 	if (items_count >= Inventar_Max_Capacity)
 	{
 		std::cout << "Inventory's full" << std::endl;
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 		return;
 	}
 	else
@@ -26,6 +27,7 @@ void Alice::equip_item()
 	if (items_count == 0)
 	{
 		std::cout << "Inventory's empty!" << std::endl;
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 		return;
 	}
 

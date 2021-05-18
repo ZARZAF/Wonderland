@@ -25,7 +25,7 @@ Position Items::get_pos() const
 
 std::ostream& operator<<(std::ostream& stream, const Items& item)
 {
-	stream.write((char*)&item.pos, sizeof(Position));
+	stream << item.pos;
 	stream.write((char*)&item.ability, sizeof(char));
 	stream << item.name;
 	return stream;
@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& stream, const Items& item)
 
 std::istream& operator>>(std::istream& stream, Items& item)
 {
-	stream.read((char*)&item.pos, sizeof(Position));
+	stream >> item.pos;
 	stream.read((char*)&item.ability, sizeof(char));
 	stream >> item.name;
 	return stream;

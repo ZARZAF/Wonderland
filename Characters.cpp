@@ -62,6 +62,7 @@ std::ostream& operator<<(std::ostream& stream, const Character& hero)
 {
 	stream.write((char*)&hero.damage, sizeof(size_t));
 	stream.write((char*)&hero.ability, sizeof(char));
+	stream << hero.pos;
 	stream << hero.name;
 	return stream;
 }
@@ -70,6 +71,7 @@ std::istream& operator>>(std::istream& stream, Character& hero)
 {
 	stream.read((char*)&hero.damage, sizeof(size_t));
 	stream.read((char*)&hero.ability, sizeof(char));
+	stream >> hero.pos;
 	stream >> hero.name;
 	return stream;
 }

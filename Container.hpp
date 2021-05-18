@@ -35,7 +35,8 @@ public:
 	
 	friend std::ostream& operator<<(std::ostream& stream,const container<T>& cont)// inline because https://stackoverflow.com/questions/27207043/overloading-the-operator-in-a-templated-class-gives-me-linker-errors-c
 	{
-		stream << cont.capacity << cont.size;
+		stream.write((char*)&cont.capacity, sizeof(size_t));
+		stream.write((char*)&cont.size, sizeof(size_t));
 		for (size_t i = 0; i < cont.capacity; i++)
 		{
 			stream << cont.cont[i];
@@ -45,9 +46,10 @@ public:
 
 	friend std::istream& operator>>(std::istream& stream, container<T>& cont)
 	{
-		stream >> cont.capacity >> cont.size;
+		stream.read((char*)&cont.capacity, sizeof(size_t));
+		stream.read((char*)&cont.size, sizeof(size_t));
 		cont.resize(cont.capacity);
-		for (size_t i = 0; i < cont.capacity && cont.size != 0; i++)
+		for (size_t i = 0; i < cont.capacity; i++)
 		{
 			stream >> cont.cont[i];
 		}

@@ -1,6 +1,8 @@
 #pragma once
 #include "Characters.h" //including Position, String
 #include "Items.h"
+#include <chrono>
+#include <thread>
 
 class Alice : public Character					     /*  /6 slot\  */
 {												     /* |Backpack| */

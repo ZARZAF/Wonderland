@@ -1,8 +1,6 @@
 #pragma once
-#include "Score.h" //including Container, Map, Alice, Character, Position, String, Items + (iostream, fstream)
-#include "Abilities.hpp"
-#include <chrono>
-#include <thread>
+#include "Score.h" //including Container, Map, Alice, Character, Position, String, Items + (iostream, fstream) + (<chrono>, <thread>)!
+#include "Abilities.hpp"																						  
 #include <conio.h>
 #include <stdlib.h>
 
@@ -157,8 +155,10 @@ void create_map()
 			throw std::exception("maps.bin could't open");
 
 		to_file << new_map;
+		//TB deleted
 		std::ofstream ra("fs.txt");
 		ra << new_map;
+		//\TB deleted
 	}
 
 	for (size_t i = 0; i < map_size; i++)
@@ -222,7 +222,6 @@ void create_item()
 }
 
 // Game functions
-
 
 
 void battle(Map& map, size_t i) // i comes from matching_pos function above^
@@ -297,7 +296,7 @@ void matching_pos(Map& map)
 bool valid_move(const Alice& alice, const Map& map)
 {
 	Position temp = alice.get_pos(); // non-const Position
-	return !check_cell_walkable(map, temp);
+	return pos_in_map(map, temp) && !check_cell_walkable(map, temp);
 }
 
 bool player_input(const Map& map) // https://cboard.cprogramming.com/cplusplus-programming/1656-how-do-you-represent-arrow-keys-cplusplus.html
@@ -313,6 +312,7 @@ bool player_input(const Map& map) // https://cboard.cprogramming.com/cplusplus-p
 		case 'K': //left arrow 
 		{
 			alice.move('l');
+			
 			if (!valid_move(alice, map))
 			{
 				alice.move('r');

@@ -260,7 +260,7 @@ bool pos_in_map(const Map& map, Position p)
 
 bool check_cell_walkable(const Map& map, Position& p)
 {
-	return map[p] != free_space && map[p] != entrance_portal;
+	return map[p] != free_space && map[p] != entrance_portal && map[p] != exit_portal;
 }
 
 bool Map::pos_is_exit_portal(Position pos) const

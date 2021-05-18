@@ -48,12 +48,14 @@ struct Position
 
 	friend std::ostream& operator<<(std::ostream& stream, const Position& pos)
 	{
-		stream << pos.x << pos.y;
+		stream.write((char*)&pos.x, sizeof(size_t));
+		stream.write((char*)&pos.y, sizeof(size_t));
 		return stream;
 	}
 	friend std::istream& operator>>(std::istream& stream, Position& pos)
 	{
-		stream >> pos.x >> pos.y;
+		stream.read((char*)&pos.x, sizeof(size_t));
+		stream.read((char*)&pos.y, sizeof(size_t));
 		return stream;
 	}
 };
