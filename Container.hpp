@@ -23,6 +23,7 @@ public:
 	~container();
 
 	void remove_item(const T& item);
+	void remove_rearagne_item(const T& item);
 	T& operator[](size_t pos);
 	T operator[](size_t pos) const;
 	void add_item(const T& item);
@@ -143,10 +144,9 @@ void container<T>::free()
 template <typename T>
 void container<T>::rearange()
 {
-	size_t mid_pt = capacity / 2;
 	T empty = T();
-	for (size_t i = capacity; i >= mid_pt && i; i--)	// going backwards if we find item we move it in
-	{													// the first free position
+	for (size_t i = capacity-1; i >= 0 && i; i--)	// going backwards if we find item we move it in
+	{												// the first free position
 		if (!(cont[i] == empty))							
 		{												
 			cont[find_item(empty)] = cont[i];			
@@ -216,6 +216,19 @@ void container<T>::remove_item(const T& item)
 	cont[item_pos] = empty;
 	size--;
 	resize();
+}
+
+template <typename T>
+void container<T>::remove_rearagne_item(const T& item)
+{
+	int item_pos = find_item(item);
+	if (item_pos == -1)
+		throw std::invalid_argument("Item doesn't exist in container");
+	T empty = T();
+	cont[item_pos] = empty;
+	size--;
+	resize();
+	rearange();
 }
 
 template <typename T>

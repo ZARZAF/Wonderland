@@ -16,14 +16,15 @@ public:
 	Character();
 	Character(size_t dmg, char ablty, string name);
 
-	void pos_set(Position& pos);
+	void pos_set(Position pos);
 	void inflict_dmg(size_t dmg);
+	void set_dmg(size_t dmg);
 	void heal();
 	string get_name() const;
 	Position get_pos() const;
 	char get_ability() const;
 	size_t get_dmg() const;
-	size_t get_hp() const;
+	int get_hp() const;
 
 	friend std::ostream& operator<<(std::ostream& stream, const Character& hero);
 	friend std::istream& operator>>(std::istream& stream, Character& hero);

@@ -1,6 +1,7 @@
 #pragma once
 #include "Alice.h" //including Character, Position, String, Items
 #include "Container.hpp"
+
 class Map
 {
 	string name;
@@ -23,8 +24,8 @@ public:
 	void set_name(string& size);
 	void set_size(size_t size);
 	void set_map(char** map);
-	void set_hero(Character hero);
-	void set_item(Items item);
+	void set_hero(Character& hero);
+	void set_item(Items& item);
 	bool set_portal(char portal);
 
 	string get_name() const;
@@ -50,10 +51,10 @@ public:
 	friend std::ostream& operator<<(std::ostream& stream, const Map& map);
 	friend std::istream& operator>>(std::istream& stream, Map& map);
 	friend bool path_algorythm(Position start_pos, Map& map, size_t& steps);
-	friend bool check_cell_walkable(const Map& map, Position& p);
-	friend size_t find_path_in_map(const Map& map);
+	friend bool check_cell_unwalkable(const Map& map, Position& p);
+	friend size_t find_path_in_map(const Map& map, Position pos);
 	friend bool correct_map(Map& temp, size_t map_size);
-	
+	friend bool valid_move(const Alice& alice, const Map& map);
 };
 
 bool operator==(const Map& lhs, const Map& rhs);

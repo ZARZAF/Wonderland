@@ -37,12 +37,12 @@ size_t Character::get_dmg() const
 	return damage;
 }
 
-size_t Character::get_hp() const
+int Character::get_hp() const
 {
 	return hp;
 }
 
-void Character::pos_set(Position& pos)
+void Character::pos_set(Position pos)
 {
 	this->pos.x = pos.x;
 	this->pos.y = pos.y;
@@ -56,6 +56,11 @@ void Character::heal()
 void Character::inflict_dmg(size_t dmg)
 {
 	hp -= dmg;
+}
+
+void Character::set_dmg(size_t dmg)
+{
+	damage = dmg;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Character& hero)

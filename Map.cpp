@@ -86,12 +86,12 @@ void Map::set_map(char** map)
 	}
 }
 
-void Map::set_hero(Character hero)
+void Map::set_hero(Character& hero)
 {
 	heroes.add_item(hero);
 }
 
-void Map::set_item(Items item)
+void Map::set_item(Items& item)
 {
 	items.add_item(item);
 }
@@ -165,12 +165,12 @@ size_t Map::get_number_of_items() const
 
 void Map::remove_item(const Items& picked_item)
 {
-	items.remove_item(picked_item);
+	items.remove_rearagne_item(picked_item);
 }
 
 void Map::remove_hero(const Character& slain_hero)
 {
-	heroes.remove_item(slain_hero);
+	heroes.remove_rearagne_item(slain_hero);
 }
 
 void Map::visualize_map(Position alice_pos) const
@@ -181,6 +181,8 @@ void Map::visualize_map(Position alice_pos) const
 		{
 			if (alice_pos.x == j && alice_pos.y == i)
 				std::cout << 'A';
+			else if (map[i][j] == free_space)
+				std::cout << ' ';
 			else
 				std::cout << map[i][j];
 		}
@@ -214,8 +216,8 @@ std::ostream& operator<<(std::ostream& stream, const Map& map)
 std::istream& operator>>(std::istream& stream, Map& map)
 {
 	stream >> map.name;
-	stream.read((char*)&map.size, sizeof(size_t));
 	map.free();
+	stream.read((char*)&map.size, sizeof(size_t));
 	map.map = new char* [map.size];
 	for (size_t i = 0; i < map.size; i++)
 	{
@@ -258,7 +260,7 @@ bool pos_in_map(const Map& map, Position p)
 	return p.x < map.get_size() && p.y < map.get_size() && p.x >= 0 && p.y >= 0;
 }
 
-bool check_cell_walkable(const Map& map, Position& p)
+bool check_cell_unwalkable(const Map& map, Position& p)
 {
 	return map[p] != free_space && map[p] != entrance_portal && map[p] != exit_portal;
 }
@@ -281,7 +283,7 @@ bool path_algorythm(Position pos, Map& map, size_t& steps)
 	if (map.pos_is_exit_portal(pos))
 		return true;
 
-	if (check_cell_walkable(map, pos))
+	if (check_cell_unwalkable(map, pos))
 	{
 		steps--;
 		return false;
@@ -300,14 +302,13 @@ bool path_algorythm(Position pos, Map& map, size_t& steps)
 
 
 
-size_t find_path_in_map(const Map& map)
+size_t find_path_in_map(const Map& map, Position pos)
 {
-	Position enter_pos = map.get_entrance();
 	size_t steps = 0;
 	
 	Map working_copy = map;
 
-	path_algorythm(enter_pos, working_copy, steps); 
+	path_algorythm(pos, working_copy, steps); 
 	return steps;
 }
 
@@ -316,5 +317,11 @@ bool correct_map(Map& map, size_t map_size)
 	if (!(map.set_portal('e') && (map.set_portal('x')))) // checks if portals exsist in map prototype and fills them in the real map
 		return false;
 
-	return find_path_in_map(map) != 0;
+	return find_path_in_map(map, map.get_entrance()) != 0;
+}
+
+bool valid_move(const Alice& alice, const Map& map)
+{
+	Position temp = alice.get_pos(); // non-const Position
+	return pos_in_map(map, temp) && !check_cell_unwalkable(map, temp);
 }
