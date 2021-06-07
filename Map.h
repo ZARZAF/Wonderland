@@ -12,13 +12,16 @@ class Map
 	Position entrance_portal;
 	Position exit_portal;
 	void copy(string name, size_t size, char** map, container<Character> heroes, container<Items> items, Position entrance, Position exit);
+	void move_copy(Map&& other);
 	void free();
 
 public:
 	Map();
-	Map(string name, size_t size, char** map, container<Character> heroes, container<Items> items, Position entrance, Position exit);
+	Map(string name, size_t size, char** map, container<Character>& heroes, container<Items>& items, Position entrance, Position exit);
 	Map(const Map& other);
+	Map(Map&& other);
 	Map& operator=(const Map & other);
+	Map& operator=(Map&& other);
 	~Map();
 
 	void set_name(string& size);

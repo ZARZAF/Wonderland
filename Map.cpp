@@ -8,7 +8,7 @@ Map::Map() : name() , heroes() , items()
 	exit_portal = Position(0, 0);
 }
 
-Map::Map(string name, size_t size, char** map, container<Character> heroes, container<Items> items, Position entrance, Position exit)
+Map::Map(string name, size_t size, char** map, container<Character>& heroes, container<Items>& items, Position entrance, Position exit)
 {
 	copy(name, size, map, heroes, items, entrance, exit);
 }
@@ -18,6 +18,11 @@ Map::Map(const Map& other)
 	copy(other.name, other.size, other.map, other.heroes, other.items, other.entrance_portal, other.exit_portal);
 }
 
+Map::Map(Map&& other)
+{
+	move_copy(std::move(other));
+}
+
 Map& Map::operator=(const Map& other)
 {
 	if (this != &other)
@@ -25,6 +30,13 @@ Map& Map::operator=(const Map& other)
 		free();
 		copy(other.name, other.size, other.map, other.heroes, other.items, other.entrance_portal, other.exit_portal);
 	}
+	return *this;
+}
+
+Map& Map::operator=(Map&& other) 
+{
+	free();
+	move_copy(std::move(other));
 	return *this;
 }
 
@@ -50,6 +62,19 @@ void Map::copy(string name, size_t size, char** map, container<Character> heroes
 	this->items = items;
 	entrance_portal = entrance;
 	exit_portal = exit;
+}
+
+void Map::move_copy(Map&& other)
+{
+	this->name = other.name;
+	this->size = other.size;
+	this->map = other.map;
+	this->heroes = std::move(other.heroes);
+	this->items = std::move(other.items);
+	this->entrance_portal = other.entrance_portal;
+	this->exit_portal = other.exit_portal;
+
+	other.map = nullptr;
 }
 
 void Map::free()

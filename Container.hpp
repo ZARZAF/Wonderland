@@ -104,7 +104,7 @@ template <typename T>
 container<T>& container<T>::operator=(container<T>&& other)
 {
 	free();
-	move_copy(other);
+	move_copy(std::move(other));
 	return *this;
 }
 
