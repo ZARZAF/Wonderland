@@ -1,3 +1,3 @@
 # Wonderland
 OOP project №1
-more detailed preview coming soon...
+Finished one!
