@@ -273,7 +273,6 @@ bool Map::pos_is_exit_portal(Position pos) const
 bool path_algorythm(Position pos, Map& map, size_t& steps)
 {
 	steps++;
-	bool passable = false;
 	if (!pos_in_map(map, pos))
 	{
 		steps--;

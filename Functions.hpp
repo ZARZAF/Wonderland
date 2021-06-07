@@ -19,12 +19,11 @@ static void battle(Map& map, Alice& alice, size_t i) // i comes from matching_po
 		victorious = true;
 	}
 
-	//abilities dmg change!!!!!!!!!!!!!!!!!!!!
 	Character enemie = map.get_heroes()[i];
 
 	while (alice.get_hp() > 0 && !victorious)
 	{
-		if (enemie.get_hp() <= 0))
+		if (enemie.get_hp() <= 0)
 		{
 			victorious = true;
 		}
@@ -101,8 +100,8 @@ static void matching_pos(Map& map, Alice& alice)
 	}
 }
 
-static char player_input() // https://cboard.cprogramming.com/cplusplus-programming/1656-how-do-you-represent-arrow-keys-cplusplus.html
-{				// Using arrow keys #including <conio.h>, <stdlib.h>
+static char player_input()   // https://cboard.cprogramming.com/cplusplus-programming/1656-how-do-you-represent-arrow-keys-cplusplus.html
+{							// Using arrow keys #including <conio.h>, <stdlib.h>
 	char key = _getch();
 	if ((key == static_cast<char>(0xe0)) || (key == static_cast<char>(0x00)))
 	{
@@ -225,5 +224,3 @@ static void play(Alice& alice, container<Map>& maps)
 
 	}
 }
-
-//Shutting

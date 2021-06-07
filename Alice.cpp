@@ -150,6 +150,7 @@ size_t Alice::find_empty_space()
 		if (inventar[i] == empty)
 			return i;
 	};
+	return -1;
 }
 
 Items Alice::get_equipped_item()

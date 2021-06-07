@@ -73,7 +73,7 @@ void create_map()
 		while (!correct_prototype_line(map_prototype[i], map_size))
 		{
 			if (map_prototype[i] == "cancel") return;
-			std::cout << "\033[A\r";	//if (); //"\033[A\r" https://stackoverflow.com/questions/1508490/erase-the-current-printed-console-line
+			std::cout << "\033[A\r";	//"\033[A\r" https://stackoverflow.com/questions/1508490/erase-the-current-printed-console-line
 			std::cout << erace << '\r' << incorect_line;
 			std::this_thread::sleep_for(std::chrono::seconds(1));
 			std::cout << '\r' << erace << '\r';

@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include "Map.h"
 
-//abilities great rework in future
+
 static size_t crit_dmg_3x(size_t dmg)
 {
 	size_t	random_quotient = rand() % 21 + 10; // [0,20] + 10 = [10,30]
