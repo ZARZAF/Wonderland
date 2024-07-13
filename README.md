@@ -1,3 +1,4 @@
 # Wonderland
 OOP project №1
-Finished one!
+
+[Wonderland Description](Wonderland_описание.pdf)
