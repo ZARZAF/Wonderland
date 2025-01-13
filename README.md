@@ -1,4 +1,4 @@
 # Wonderland
-OOP project №1
+Console labyrinth game
 
 [Wonderland Description](Wonderland_описание.pdf)
